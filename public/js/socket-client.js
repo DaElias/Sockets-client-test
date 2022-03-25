@@ -5,11 +5,20 @@ const lblOnline = document.getElementById("lblOnline");
 const lblOffline = document.getElementById("lblOffline");
 const btnEnviar = document.getElementById("btnEnviar");
 const inputMensaje = document.getElementById("inputMensaje");
+const colorChat = generateRandomCode();
+const barradeChat = document.getElementById("barradeChat");
+const cuadrado = document.getElementById("cuadrado");
 
+cuadrado.style.backgroundColor = colorChat;
 socketCliente.on("enviar-mensaje", (payload) => {
-  if (socketCliente.id !== payload.id) {
-    console.log(payload);
-  }
+  // if (socketCliente.id !== payload.id) {
+  //   console.log(payload);
+  // }
+  barradeChat.innerHTML += `
+  <hr><p
+  style="background-color:${payload.color};"
+  >
+  Mensaje: ${payload.mensaje} </p>`;
 });
 
 //code
@@ -31,7 +40,19 @@ btnEnviar.addEventListener("click", () => {
     mensaje,
     id: socketCliente.id,
     fecha: new Date().getTime(),
+    color: colorChat,
   };
-  socketCliente.emit("enviar-mensaje", payload, (id) => console.log(id));
+  socketCliente.emit("enviar-mensaje", payload, (payload) => {
+    barradeChat.innerHTML += `
+  <hr><p
+  style="background-color:${payload.color};"
+  >
+  Mensaje: ${payload.mensaje} </p>`;
+  });
   inputMensaje.value = "";
 });
+
+function generateRandomCode() {
+  var myRandomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  return myRandomColor;
+}
