@@ -31,15 +31,21 @@
       <span id="lblOffline" class="text-danger">Offline</span>
     </p>
     <div class="row">
-        <div class="col">
-            <input id="inputMensaje" class=" " type="text">
-            <button id="btnEnviar" class="btn-primary">Enviar</button>
-        </div>
+      <div class="col">
+        <form action="#">
+          <label for="text">
+            <input id="inputMensaje" class=" " type="text" />
+            <button id="btnEnviar" type="submit" class="btn-primary">
+          </label>
+            Enviar
+          </button>
+        </form>
+      </div>
 
-        <div class="col"></div>
+      <div class="col"></div>
     </div>
-    <div  class="row container">
-        <h3 id="cuadrado">Chats color</h3>
+    <div class="row container">
+      <h3 id="cuadrado">Chats  tu color es <b id="textColor">C</b></h3>
       <div id="barradeChat"></div>
     </div>
     <script src="./socket.io/socket.io.js"></script>

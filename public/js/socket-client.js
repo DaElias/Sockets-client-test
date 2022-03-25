@@ -8,17 +8,18 @@ const inputMensaje = document.getElementById("inputMensaje");
 const colorChat = generateRandomCode();
 const barradeChat = document.getElementById("barradeChat");
 const cuadrado = document.getElementById("cuadrado");
+const textColor = document.getElementById("textColor");
 
-cuadrado.style.backgroundColor = colorChat;
+textColor.style.backgroundColor = colorChat;
+textColor.style.color = colorChat;
 socketCliente.on("enviar-mensaje", (payload) => {
   // if (socketCliente.id !== payload.id) {
   //   console.log(payload);
   // }
   barradeChat.innerHTML += `
-  <hr><p
-  style="background-color:${payload.color};"
-  >
-  Mensaje: ${payload.mensaje} </p>`;
+  <hr><p>
+      <div style="width: 20px; height: 20px; background-color:${payload.color};"> </div>
+      Mensaje: ${payload.mensaje}  </p>`;
 });
 
 //code
@@ -44,10 +45,9 @@ btnEnviar.addEventListener("click", () => {
   };
   socketCliente.emit("enviar-mensaje", payload, (payload) => {
     barradeChat.innerHTML += `
-  <hr><p
-  style="background-color:${payload.color};"
-  >
-  Mensaje: ${payload.mensaje} </p>`;
+    <hr><p>
+        <div style="width: 20px; height: 20px; background-color:${payload.color};"> </div>
+        Mensaje: ${payload.mensaje}  </p>`;
   });
   inputMensaje.value = "";
 });
