@@ -16,10 +16,7 @@ socketCliente.on("enviar-mensaje", (payload) => {
   // if (socketCliente.id !== payload.id) {
   //   console.log(payload);
   // }
-  barradeChat.innerHTML += `
-  <hr><p>
-      <div style="width: 20px; height: 20px; background-color:${payload.color};"> </div>
-      Mensaje: ${payload.mensaje}  </p>`;
+  imprimirTxt(payload);
 });
 
 //code
@@ -44,10 +41,7 @@ btnEnviar.addEventListener("click", () => {
     color: colorChat,
   };
   socketCliente.emit("enviar-mensaje", payload, (payload) => {
-    barradeChat.innerHTML += `
-    <hr><p>
-        <div style="width: 20px; height: 20px; background-color:${payload.color};"> </div>
-        Mensaje: ${payload.mensaje}  </p>`;
+    imprimirTxt(payload);
   });
   inputMensaje.value = "";
 });
@@ -55,4 +49,11 @@ btnEnviar.addEventListener("click", () => {
 function generateRandomCode() {
   var myRandomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
   return myRandomColor;
+}
+
+function imprimirTxt(payload) {
+  barradeChat.innerHTML += `
+  <hr><p>
+      <div style="width: 20px; height: 20px; "> </div>
+      Mensaje de: <b style="background-color:${payload.color}; color:${payload.color};">B</b>: ${payload.mensaje}  </p>`;
 }
